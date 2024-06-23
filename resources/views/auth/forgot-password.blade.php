@@ -2,41 +2,12 @@
       <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <a href="/" class="icon flex-shrink-0 flex items-center">
-          Forex<span class="iconSecundario">.Gump</span> 
-        </a>
+        <div style="text-align: center; width: 300px;">
+            <a href="/" class="icon">
+                <img src="{{ asset('img/forexgump3.png') }}" alt="Descripción de la imagen" class="icon">
+            </a>
+        </div>
 
-        <style>
-
-            .icon{
-                background-color: #1f2937;
-                border-radius: 20px;
-                padding-right: 5px;
-                padding-left: 5px;
-            }
-
-            .icon{
-              font-size: 30px;
-              color: crimson;
-            font-family: 'Black Ops One', cursive;
-          
-            }
-
-            .iconSecundario{
-              color: white;
-            }
-
-             .icon:hover{
-              
-              color: crimson;
-          
-            }
-
-            .iconSecundario:hover{
-              color: white;
-            }
-
-        </style>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">

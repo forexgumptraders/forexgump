@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 class Post extends Model
 {
@@ -38,5 +39,10 @@ class Post extends Model
     	return $this->morphOne(Image::class, 'imageable');
     }
 
+
+    public function getCreatedAtAttribute($date){
+
+        return new Date($date);
+    }
 
 }

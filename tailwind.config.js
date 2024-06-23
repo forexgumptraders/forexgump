@@ -14,6 +14,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+
+            backgroundColor: {
+                'amber': 'rgb(245 158 11)',
+            },
         },
     },
 

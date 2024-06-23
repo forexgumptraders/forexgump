@@ -11,6 +11,7 @@ use App\Observers\PostObserver;
 use App\Models\Article;
 use App\Observers\ArticleObserver;
 
+
 class EventServiceProvider extends ServiceProvider
 {
     /**

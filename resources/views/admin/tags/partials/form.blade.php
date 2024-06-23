@@ -22,12 +22,7 @@
    				</div>
 
    				<div class="for-group">
-   				<!-- 	<label for="">Color:</label>
-   					<select name="color" id="" class="form-control">
-   						<option value="red">Color rojo</option>
-   						<option value="green">Color verde</option>
-   						<option value="blue" selected>Color azul</option>
-   					</select> -->
+   			
    					{!! Form::label('color', 'Color:') !!}
 
    					{!! Form::select('color', $colors, null, ['class' => 'form-control']) !!}

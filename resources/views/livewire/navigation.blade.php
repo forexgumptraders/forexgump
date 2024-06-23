@@ -1,282 +1,326 @@
-<nav class="bg-gray-800" x-data="{open: false}">
+<nav x-data="{open: false}" x-bind:style="'background-color: ' + $wire.navColor">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+  
+
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poiret+One&family=Trade+Winds&display=swap" rel="stylesheet">
-<link rel = "preconnect" href = "https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poiret+One&family=Righteous&family=Saira+Stencil+One&family=Spartan:wght@100&family=Trade+Winds&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
 
-
-    	<!-- Mobile menu button-->
+      <!-- Mobile menu button-->
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        
-        <button x-on:click="open = true" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
 
-
-  
-          <!--
-            Icon when menu is closed.
-
-            Heroicon name: outline/menu
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-
-
-
-          <!--
-            Icon when menu is open.
-
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <button id="menuButton" x-on:click="open = true" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" class="menu inline-flex items-center justify-center p-2 rounded-md  " aria-expanded="false">
+          <svg width="40" height="40" viewBox="0 0 100 100">
+            <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+            <path class="line line2" d="M 20,50 H 80" />
+            <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
           </svg>
         </button>
+
+
+        <script>
+          const menuButton = document.getElementById("menuButton");
+
+          // Agrega un evento click al documento
+          document.addEventListener("click", (event) => {
+            // Comprueba si el clic ocurrió fuera del botón y no dentro del menú
+            if (
+              !menuButton.contains(event.target) &&
+              event.target.tagName !== "A" &&
+              !event.target.closest(".menu-links")
+            ) {
+              menuButton.classList.remove("opened");
+              menuButton.setAttribute("aria-expanded", "false");
+            }
+          });
+
+          // var lastScrollTop = 0;
+
+          // window.addEventListener("scroll", function() {
+          //   var st = window.scrollY;
+
+          //   if (st > lastScrollTop) {
+          //     // Scrolling hacia abajo
+          //     document.querySelector("nav").classList.add("hidden");
+          //   } else {
+          //     // Scrolling hacia arriba
+          //     document.querySelector("nav").classList.remove("hidden");
+          //   }
+
+          //   lastScrollTop = st;
+          // });
+        </script>
+
+
+
+        <style>
+ 
+        /* nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+          }
+
+          .hidden {
+            top: -80px; 
+          } */
+  
+          .menu {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            padding: 0;
+            z-index: 9999;
+          }
+
+          .line {
+            fill: none;
+            stroke: black;
+            stroke-width: 3;
+            transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          .line1 {
+            stroke-dasharray: 60 207;
+            stroke-width: 3;
+          }
+
+          .line2 {
+            stroke-dasharray: 60 60;
+            stroke-width: 3;
+          }
+
+          .line3 {
+            stroke-dasharray: 60 207;
+            stroke-width: 3;
+          }
+
+          .opened .line1 {
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 3;
+          }
+
+          .opened .line2 {
+            stroke-dasharray: 1 60;
+            stroke-dashoffset: -30;
+            stroke-width: 3;
+          }
+
+          .opened .line3 {
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 3;
+          }
+        </style>
+
       </div>
-
-
-
 
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
 
-      	<!-- logotipo-->
-
-        <a href="/" class="icon flex-shrink-0 flex items-center">
-          Forex<span class="iconSecundario">.Gump</span> 
+        {{-- logotipo --}}
+        <a href="/" class="flex-shrink-0 flex items-center icono">
+          @if($icono && $icono->ruta_completa_imagen)
+          <img class="block lg:hidden h-8 w-auto" src="{{ url('storage/' . $icono->ruta_completa_imagen) }}" alt="Icono">
+          <img class="hidden lg:block h-8 w-auto" src="{{ url('storage/' . $icono->ruta_completa_imagen) }}" alt="Icono">
+          @else
+          <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+          <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
+          @endif
         </a>
 
 
-<style>
+        <a href="/" class="flex justify-center items-center iconoChico">
+          <img class="block lg:hidden h-16 w-auto" src="{{ asset('img/forexjaponesicono.png') }}">
+          <img class="hidden lg:block h-16 w-auto" src="{{ asset('img/forexjaponesicono.png') }}">
+        </a>
 
 
-p {
-  margin-bottom: 20px;
-  line-height: 150%;
-}
 
-.aviso-cookies {
-  display: none;
-  background: #fff;
-  padding: 20px;
-  width: calc(100% - 40px);
-  max-width: 300px;
-  line-height: 150%;
-  border-radius: 10px;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-  padding-top: 60px;
-  box-shadow: 0px 2px 20px 10px rgba(222,222,222,.25);
-  text-align: center;
-}
+        <style>
+          @media screen and (max-width: 759px) {
 
-.aviso-cookies.activo {
-  display: block;
-}
+            /* Estilos para el componente de búsqueda */
+            .icono {
+              display: none;
+              /* Mostrar el componente */
+            }
 
-.aviso-cookies .galleta {
-  max-width: 100px;
-  position: absolute;
-  top: -50px;
-  left: calc(50% - 50px);
-}
+          }
 
-.aviso-cookies .titulo,
-.aviso-cookies .parrafo {
-  margin-bottom: 15px;
-}
+          @media screen and (min-width: 759px) {
 
-.aviso-cookies .boton {
-  width: 100%;
-  background: crimson;
-  border: none;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  padding: 15px 20px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .3s ease all;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
+            /* Estilos para el componente de búsqueda */
+            .iconoChico {
+              display: none;
+              /* Mostrar el componente */
 
-.aviso-cookies .boton:hover {
-  background: #000;
-}
+            }
 
-.aviso-cookies .enlace {
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
-}
+          }
 
-.aviso-cookies .enlace:hover {
-  text-decoration: underline;
-}
-
-.fondo-aviso-cookies {
-  display: none;
-  background: rgba(0,0,0,.20);
-  position: fixed;
-  z-index: 99;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-}
-
-.fondo-aviso-cookies.activo {
-  display: block;
-}
+          @media screen and (min-width: 640px) and (max-width: 680px) {
+            .iconoChico {
+              min-width: 100px; 
+              margin-left: -30px;
+            }
+        }
+        </style>
 
 
-.icon{
 
-font-size: 30px;
-color: crimson;
-font-family: 'Black Ops One', cursive;
-}
-.iconSecundario{
-color: white;
-}
 
-.icon:hover{ 
-color: crimson;
-}
 
- .iconSecundario:hover{
- color: white;
- }
-
-@media (max-width: 750px) {
- .icon{
-margin-left: 30px;
-font-size: 25px;
- } 
-}
-</style>
-
-        <!-- Menu lg--> 
-
+        {{-- menu lg  --}}
         <div class="hidden sm:block sm:ml-6">
-          <div class="flex px-3 py-2  space-x-4">
+          <div class="flex space-x-4 menuOptions">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            
-  @foreach($categories as $category)
-            <a  class="text-white block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
-            @endforeach
-
-  
-
-            <!-- This example requires Tailwind CSS v2.0+ -->
-<!-- <div  class="relative inline-block text-left" x-data="{open: false}">
-  <div>
-    <button x-on:click="open = true" type="button" class="inline-flex text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="true" aria-haspopup="true">
-      Secciones
-     
-      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-      </svg>
-    </button>
-  </div>
-
-  <div class="secciones origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-    <div x-show="open" x-on:click.away="open = false" class="py-1" role="none">
-
-            @foreach($categories as $category)
-            <a  class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
-            @endforeach
-    </div>
-  </div>
-</div>
- -->
-  <style>
-    .secciones{
-      z-index: 100;
-    }
-  </style>
-
-                 <!-- <a href="/products" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Robots</a> 
-                 -->
-
-                <!-- <a href="/articles" class="text-white px-3 py-2 rounded-md text-sm font-medium" >Señales</a>  -->
-<!-- 
-                <a href="/cryptos" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Cryptos</a>  -->
 
 
+            <a href="/home" id="homeNosotros" class="dos text-white px-3 py-2 text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>HOME</span></a>
 
-                <a href="/nosotros" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a> 
+            <a href="/articles" class="dos articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>SEÑALES</span></a>
 
-  
+            <a href="/trading-ai" class="dos articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>ROBOT</span></a>
+
+            <div class="relative inline-block text-left" x-data="{open: false}" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
+                <div x-on:click="open = !open">
+                    <button type="button" class="dos inline-flex text-white px-3 py-2 text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                        <span x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">BLOG</span>
+                        <svg class="-mr-1 ml-2 h-5 w-5 transition-transform transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" x-bind:class="{'rotated': open}">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div x-show="open" x-on:mouseenter="open = true" x-on:mouseleave="open = false" class="secciones origin-top-right absolute mt-0 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="py-1" role="none">
+                        @foreach($categories as $category)
+                            <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{ route('post.category', $category) }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ $category->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
           </div>
         </div>
-      </div>
 
+        <div class="relative searchMax px-8 mx-auto text-center" style="width: 100%;">
+          <div x-data="{ isOpen: true }" @click.away="isOpen = false">
+            <div x-data="{ placeholderVisible: true }">
+              <div class="relative searchMax">
+                <span class="fa fa-search search absolute left-3 text-xl text-gray-400 pointer-events-none"></span>
+                <input wire:model="search" class="w-full h-10 pl-10 pr-3 rounded border border-solid border-neutral-300 bg-white text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-500 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary text-center" @click="isOpen = true; placeholderVisible = false" @blur="isOpen = false; placeholderVisible = true" x-bind:placeholder="placeholderVisible ? 'Buscar Post' : ''">
+              </div>
+            </div>
+            <!-- Resultados de búsqueda -->
+            @if (!empty($searchResults) && count($searchResults) > 0)
+            <div x-data="{ isOpen: false }" class="search-results-container absolute mt-2 w-full bg-white border border-gray-300 rounded shadow-lg" style="z-index: 1;">
+              <!-- Contenedor del resultado de búsqueda con ancho del 100% -->
+              <div style="width: 100%;">
+                <ul>
+                  @foreach ($searchResults as $result)
+                  <li class="p-2 hover:bg-gray-100">
+                    <div class="flex items-center">
+                      @if ($result->image)
+                      <img src="{{ Storage::url($result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                      @else
+                      <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                      @endif
+                      <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline result-post">{{ $result->name }}</a>
+                    </div>
+
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+            @endif
+
+          </div>
+        </div>
+
+
+
+        <style>
+          .rotated {
+            transform: rotate(180deg);
+            /* Rotar 180 grados */
+            transition: transform 0.3s ease;
+            /* Agrega una transición suave */
+          }
+
+          .placeholder-center::placeholder {
+            text-align: center;
+            /* Centra horizontalmente el texto del placeholder */
+            vertical-align: middle;
+            /* Centra verticalmente el texto del placeholder */
+            line-height: 1.6rem;
+            /* Ajusta la altura de línea para centrar verticalmente */
+          }
+
+          .search-results-container {
+            max-height: 300px;
+            /* Ajusta la altura máxima según tus necesidades */
+            overflow-y: auto;
+          }
+
+          .search {
+            margin-top: 10px;
+            padding-left: 7px;
+          }
+        </style>
+
+      </div>
 
       @auth
 
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-      	<!-- Boton notificacion-->
-<!-- 
-        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+      <style>
+        @media screen and (min-width: 260px) and (max-width: 639px) {
+          .searchMax {
+            display: none;
+          }
+        }
  
-         
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-        </button> -->
+      </style>
+
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        {{-- Boton notificación --}}
+        <!-- Boton notificacion-->
+        <div class="btnNotification">
+          @livewire('notification-component')
+        </div>
 
         <!-- Profile dropdown -->
-        <div class="ml-3 relative" x-data="{open: false}">
+        <div class="ml-3 relative" x-data="{ open:false }">
           <div>
-            <button x-on:click="open = true" type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-       
-              <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url}}" alt="">
+            <button x-on:click="open = true" class="flex text-sm  focus:outline-none" id="user-menu" aria-haspopup="true">
+              <span class="sr-only">Open user menu</span>
+              <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
             </button>
           </div>
-       
-          <!--
-            Dropdown menu, show/hide based on menu state.
 
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-          <div x-show="open" x-on:click.away="open = false" class="menuOptions origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="{{route('profile.show')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Tu perfil</a>
+          <div x-show="open" x-on:click.away="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" style="z-index: 1;" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tu perfil</a>
 
-          <!--    <a href="{{route('billing.index')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Planes</a> -->
-         
+            <!-- <a href="{{route('billing.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Facturación</a> -->
+            <a href="{{route('robots.show')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Mis Robots</a>
+
             @can('admin.home')
-               <a href="{{route('admin.home')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Dashboard</a>
+            <a href="{{ route('admin.home') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Dashboard</a>
             @endcan
 
-
             <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" onclick="event.preventDefault();
-                                    this.closest('form').submit();">Salir</a>
+              @csrf
+              <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" onclick="event.preventDefault();
+                            this.closest('form').submit();">Cerrar sesión</a>
 
             </form>
 
@@ -284,151 +328,316 @@ font-size: 25px;
         </div>
       </div>
 
-      <style>
-        .menuOptions{
-          z-index: 100;
-        }
-        .icon{
-          margin-right: 40px;
-        }
-      </style>
-
       @else
 
+      <style>
+        @media screen and (min-width: 260px) and (max-width: 640px) {
 
-        <div class="login flex">
-            <a href="{{route('login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ingresar</a>
-            <a href="{{route('register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Unirse</a>
-            
-        </div>
-
-          <style>
-            @media (min-width: 336px) and (max-width: 361px) {  
-            
-          .login{
-            display: block;
-            padding-left: 40px;
+          .iconoChico img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
           }
 
-        .icon{
-          margin-left: 50px;
         }
-      }
 
-          @media (min-width: 300px) and (max-width: 336px) {  
-            
-          .login{
-            display: block;
-            padding-left: 30px;
+        @media screen and (min-width: 260px) and (max-width: 639px) {
+          .searchMax {
+            display: none;
           }
-          .icon{
-          margin-left: 40px;
         }
       </style>
+
+      <a href="{{ route('login') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">
+        <img src="{{ asset('img/log-in-regular-120.png') }}" style="max-width: 40px;" alt="Descripción de la imagen">
+      </a>
+
+
 
 
       @endauth
     </div>
   </div>
+  <div class="relative searchMaxDown mx-auto text-center" style="width: 100%;">
+    <div x-data="{ isOpen: true }" @click.away="isOpen = false">
+      <div x-data="{ placeholderVisible: true }">
+        <div class="relative searchMaxDown">
+          <span class="fa fa-search search absolute left-3 text-xl text-gray-400 pointer-events-none"></span>
+          <input wire:model="search" class="w-full h-10 pl-10 pr-3 rounded border border-solid border-neutral-300 bg-white text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-500 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary text-center" @click="isOpen = true; placeholderVisible = false" @blur="isOpen = false; placeholderVisible = true" x-bind:placeholder="placeholderVisible ? 'Buscar Post' : ''">
+        </div>
+      </div>
+      <!-- Resultados de búsqueda -->
+      @if (!empty($searchResults) && count($searchResults) > 0)
+      <div x-data="{ isOpen: false }" class="search-results-container absolute mt-2 w-full bg-white border border-gray-300 rounded shadow-lg" style="z-index: 1;">
+        <!-- Contenedor del resultado de búsqueda con ancho del 100% -->
+        <div style="width: 100%;">
+          <ul>
+            @foreach ($searchResults as $result)
+            <li class="p-2 hover:bg-gray-100">
+              <div class="flex items-center">
+                @if ($result->image)
+                <img src="{{ Storage::url($result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                @else
+                <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                @endif
+                <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline result-post">{{ $result->name }}</a>
+              </div>
 
-
-
-  <!-- Menu movil -->
-  <div class="sm:hidden focus:outline-none" id="mobile-menu" x-show= "open" x-on:click.away="open = false">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-
-     
-      @foreach($categories as $category)
-            <a  class="bg-gray-700 text-center text-white block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
+            </li>
             @endforeach
+          </ul>
+        </div>
+      </div>
+      @endif
 
-
-<div  class=" text-gray-300 text-left hover:text-white block px-3 py-2 rounded-md text-base font-medium"x-data="{open: false}">
-
-<!--   <div>
-    <button x-on:click="open = true" type="button" class="inline-flex text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="true" aria-haspopup="true">
-      Secciones
-
-      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-      </svg>
-    </button>
+    </div>
   </div>
- -->
- 
-  <div class="rounded-md shadow-lg bg-gray ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-  <!--   <div x-show="open" x-on:click.away="open = false" class="py-1" role="none">
+  {{-- Menu mobil --}}
+  <div class="sm:hidden" x-show="open" x-on:click.away="open = false">
+
+    <div class="relative">
+      <div x-data="{ isOpen: true }" @click.away="isOpen = false">
+        <div x-data="{ placeholderVisible: true }">
+          <div class="relative  ">
+            <span class="fa fa-search search absolute left-3 text-xl text-gray-400 pointer-events-none"></span>
+            <input wire:model="search" class="menu-links w-full h-10  pr-3 rounded border border-solid border-neutral-300 bg-white text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-500 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary text-center" @click="isOpen = true; placeholderVisible = false" @blur="isOpen = false; placeholderVisible = true" x-bind:placeholder="placeholderVisible ? 'Buscar Post' : ''">
+          </div>
+
+        </div>
+        <!-- Resultados de búsqueda -->
+        @if (!empty($searchResults) && count($searchResults) > 0)
+        <div x-data="{ isOpen: false }" class="search-results-container absolute mt-2 w-full bg-white border border-gray-300 rounded shadow-lg" style="z-index: 1;">
+          <!-- Contenedor del resultado de búsqueda con ancho del 100% -->
+          <div style="width: 100%;">
+            <ul>
+              @foreach ($searchResults as $result)
+              <li class="p-2 hover:bg-gray-100">
+                <div class="flex items-center">
+                  @if ($result->image)
+                  <img src="{{ asset('storage/' . $result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                  @else
+                  <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                  @endif
+                  <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline">{{ $result->name }}</a>
+
+                </div>
+              </li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+        @endif
+
+      </div>
+    </div>
+    <div class="menu-links botonMenu sm:hidden focus:outline-none text-center">
+
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
 
 
+    
+
+        <div class=" text-gray-300 text-left hover:text-white block rounded-md text-base font-medium" x-data="{open: false}">
+
+
+        <a href="/home" class="text-center flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">
+            <span>Home</span>
+            <span class="ml-auto">
+                <div><img src="{{ asset('img/icons/home-alt-2-regular-24.png') }}" alt="Descripción de la imagen"></div>
+            </span>
+        </a>
+        <a href="/articles" class="text-center flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">
+            <span>Señales</span>
+            <span class="ml-auto">
+                <div><img src="{{ asset('img/icons/candles-regular-24.png') }}" alt="Descripción de la imagen"></div>
+            </span>
+        </a>
+        <a href="/trading-ai" class="text-center flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">
+            <span>Robot</span>
+            <span class="ml-auto">
+                <div><img src="{{ asset('img/icons/bot-regular-24.png') }}" alt="Descripción de la imagen"></div>
+            </span>
+        </a>
+
+
+        </div>
+        
+        <div class="relative text-center" x-data="{open: false}">
+          
+        <div>
+        <div role="button" tabindex="0" x-on:click="open = true" class="menu-links flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="true" aria-haspopup="true" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">
+    <span>Blog</span>
+    <span class="ml-auto">
+        <img src="{{ asset('img/icons/news-regular-24.png') }}" alt="Descripción de la imagen">
+    </span>
+</div>
+
+</div>
+
+
+
+
+
+          <div x-show="open" x-on:click.away="open = false" class="py-1" role="none">
 
             @foreach($categories as $category)
-            <a  class="bg-gray-700 text-center text-white block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{route('posts.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$category->name}}</a>
+            <a class="menu-links text-center text-white block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" href="{{route('post.category', $category)}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">{{$category->name}}</a>
             @endforeach
+          </div>
 
+        </div>
+      </div>
 
-    </div> -->
+    </div>
 
-<!--             <a href="/products" class="text-white block px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Robots</a> 
- -->
-          <!--  
-                <a href="/articles" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Señales</a>  -->
-
-           <!--  <a href="/cryptos" class="text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Cryptos</a>
- -->
-
-                <a href="/nosotros" class="text-center text-white block px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a> 
-
-
-  </div>
 </div>
+
+<div class="forex-prices">
+  <ul id="currency-list" class="currency-carousel">
     
+  </ul>
+</div>
+<!-- resources/views/livewire/navigation.blade.php -->
+<div>
+    <div>
+        @auth
+            @if(!$isEmailVerified)
+
+
+            <script>
+                     document.addEventListener('DOMContentLoaded', (event) => {
+                          document.querySelector('.alert .close').addEventListener('click', function() {
+                              document.getElementById('alert-box').style.display = 'none';
+                          });
+                      });
+
+            </script>
+                <!-- Usuario no verificado, muestra el banner con enlace -->
+                <div id="alert-box" class="alert-warning text-center custom-alert" role="alert" style="background-color: #EFE4B0; color: #D6AA2E; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                    <span>Tu correo electrónico no ha sido verificado.&nbsp;</span>
+                    <a href="{{ route('verification.notice') }}" class="alert-link underline-link">Haz clic aquí para verificarlo</a>.
+                    <button type="button" class="close" style="background: none; border: none; font-size: 20px; font-weight: bold; cursor: pointer; margin-left: 10px;">&times;</button>
+                </div>
+
+
+            @endif
+        @endauth
     </div>
-  </div>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MB7HJ8K');</script>
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB7HJ8K"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+</div>
 
 
-    <div class="aviso-cookies" id="aviso-cookies">
-      <img class="galleta" src="./img/forexgump.png" alt="Galleta">
-      <h3 class="titulo">Cookies</h3>
-      <p class="parrafo">Utilizamos cookies propias y de terceros para mejorar nuestros servicios.</p>
-      <button class="boton" id="btn-aceptar-cookies">De acuerdo</button>
-      <a class="enlace" href="{{route('posts.cookies')}}">Aviso de Cookies</a>
-    </div>
-    <div class="fondo-aviso-cookies" id="fondo-aviso-cookies"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB7HJ8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
-  <script>
-    const botonAceptarCookies = document.getElementById('btn-aceptar-cookies');
-    const avisoCookies = document.getElementById('aviso-cookies');
-    const fondoAvisoCookies = document.getElementById('fondo-aviso-cookies');
 
-    dataLayer = [];
+<style>
+  .placeholder-center::placeholder {
+    text-align: center;
+    /* Centra horizontalmente el texto del placeholder */
+    vertical-align: middle;
+    /* Centra verticalmente el texto del placeholder */
+    line-height: 1.6rem;
+    /* Ajusta la altura de línea para centrar verticalmente */
+  }
 
-    if(!localStorage.getItem('cookies-aceptadas')){
-      avisoCookies.classList.add('activo');
-      fondoAvisoCookies.classList.add('activo');
-    } else {
-      dataLayer.push({'event': 'cookies-aceptadas'});
+ /* styles.css */
+.underline-link {
+    text-decoration: underline;
+}
+.custom-alert {
+    height: 60px; /* Puedes ajustar este valor según tus necesidades */
+}
+/* styles.css */
+.custom-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* Puedes ajustar este valor según tus necesidades */
+}
+
+  @media screen and (min-width: 1023px) {
+
+    /* Estilos para el componente de búsqueda */
+    .searchMaxDown {
+      display: none;
+      /* Mostrar el componente */
+
     }
 
-    botonAceptarCookies.addEventListener('click', () => {
-      avisoCookies.classList.remove('activo');
-      fondoAvisoCookies.classList.remove('activo');
+  }
 
-      localStorage.setItem('cookies-aceptadas', true);
 
-      dataLayer.push({'event': 'cookies-aceptadas'});
-    });
-  </script>
+  @media screen and (max-width: 639px) {
 
+    /* Estilos para el componente de búsqueda */
+    .searchMaxDown {
+      display: none;
+      /* Mostrar el componente */
+
+    }
+
+  }
+
+  @media screen and (min-width: 638px) and (max-width: 1023px) {
+
+    /* Estilos para el componente de búsqueda */
+    .searchMax {
+      display: none;
+      /* Agregar un margen superior si es necesario */
+    }
+  }
+  
+  .bg-pink-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 39 119	 / var(--tw-bg-opacity));
+  }.bg-green-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(101 163 13	 / var(--tw-bg-opacity));
+  }.bg-yellow-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(202 138 4 / var(--tw-bg-opacity));
+  }.bg-purple-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(147 51 234	 / var(--tw-bg-opacity));
+  }.bg-blue-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235	 / var(--tw-bg-opacity));
+  }
+  
+</style>
 </nav>
+
+@section('js')
+<!-- Agrega esto dentro de tu vista Livewire -->
+<script>
+  document.addEventListener('livewire:load', function() {
+    Livewire.on('colorUpdated', function(navColor) {
+      var nav = document.querySelector("nav");
+      if (nav) {
+        nav.style.backgroundColor = navColor;
+      }
+    });
+
+    Livewire.on('textColorUpdated', function(fontColor) {
+      var menuLinks = document.querySelectorAll(".menu-link");
+      if (menuLinks) {
+        menuLinks.forEach(link => {
+          link.style.color = fontColor;
+        });
+      }
+    });
+  });
+
+  
+
+
+</script>
+
+
+@endsection

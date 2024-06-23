@@ -1,0 +1,23 @@
+  /* Clase para el botón de "Me gusta" seleccionado */
+  .like-selected {
+    color: #3b82f6;
+    /* Puedes ajustar el color según tus preferencias */
+  }
+
+  /* Clase para el botón de "No me gusta" seleccionado */
+  .dislike-selected {
+    color: crimson;
+    /* Puedes ajustar el color según tus preferencias */
+  }
+
+  .tab-button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .tab-button:hover {
+    background-color: #e2e8f0; /* Color de fondo al hacer hover */
+    color: #1a202c; /* Color de texto al hacer hover */
+  }
+  .bg-tele {
+      background-color: #039be5;
+    }

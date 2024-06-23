@@ -16,6 +16,7 @@
 							{!!$post->extract!!}
 						</div>
 				</div>
+			
 
 				<div class="px-6 pt-4 pb-2">
 						@foreach($post->tags as $tag)
@@ -23,4 +24,14 @@
 						@endforeach
 				</div>
 
+				<div class="fechaBlog">
+				{{$post->created_at->format('l j \\de F \\de Y')}}
+				</div>
+				<style>
+					.fechaBlog{
+						margin-top: 20px;
+						margin-bottom: 20px;
+						text-align: center;
+					}
+				</style>
 </article>

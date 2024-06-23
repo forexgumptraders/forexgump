@@ -42,4 +42,6 @@
             @endif
         </div>
     </div>
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+
 </x-app-layout>

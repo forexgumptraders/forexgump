@@ -18,6 +18,28 @@
 
    			</div> -->
 
+            
+            <div class="form-group">
+               <p class="font-weight-bold">Modo</p>
+
+               <label>
+                  {!! Form::radio('modo', "free", true) !!}
+                  Free
+               </label>
+
+               <label>
+                  {!! Form::radio('modo', "plus") !!}
+                  Plus
+               </label>
+
+             
+      
+               @error('status')
+               <br>  
+                  <small class="text-danger">{{$message}}</small>
+               @enderror
+
+            </div>
 
    			<div class="form-group">
    				<p class="font-weight-bold">Estado</p>
@@ -47,7 +69,9 @@
    						@isset($article->image)
                      <img id="picture" src="{{Storage::url($article->image->url)}}" alt="">
                      @else
-                     <img id="picture" src="https://cdn.pixabay.com/photo/2016/10/04/13/05/graphic-1714230_960_720.png" alt="">
+                     <!-- <img id="picture" src="https://cdn.pixabay.com/photo/2016/10/04/13/05/graphic-1714230_960_720.png" alt=""> -->
+                     <img id="picture" src="{{ asset('img/no-signal.jpg') }}" alt="Ejemplo">
+
                      @endisset
    					</div>
    				</div>
@@ -86,6 +110,17 @@
                   {!! Form::radio('estado', "Negativa") !!}
                   Negativa
                </label>
+
+               <label>
+                  {!! Form::radio('estado', "Cancelada") !!}
+                  Cancelar
+               </label>
+
+               <label>
+                  {!! Form::radio('estado', "Break even") !!}
+                  Break even
+               </label>
+             
       
                @error('status')
                <br>  
@@ -100,13 +135,29 @@
 
 
                <label>
-                  {!! Form::radio('orden', "Compra", true) !!}
-                  Compra
+                  {!! Form::radio('orden', "Buy", true) !!}
+                  Buy
                </label>
 
                <label>
-                  {!! Form::radio('orden', "Venta") !!}
-                  Venta
+                  {!! Form::radio('orden', "Sell") !!}
+                  Sell
+               </label>
+               <label>
+                  {!! Form::radio('orden', "Buy Limit") !!}
+                  Buy Limit
+               </label>
+               <label>
+                  {!! Form::radio('orden', "Sell Limit") !!}
+                  Sell Limit
+               </label>
+               <label>
+                  {!! Form::radio('orden', "Buy Stop") !!}
+                  Buy Stop
+               </label>
+               <label>
+                  {!! Form::radio('orden', "Sell Stop") !!}
+                  Sell Stop
                </label>
 
       
@@ -117,6 +168,15 @@
 
             </div>
 
+            <div class="form-group">
+               {!! Form::label('entrada', 'Orden de entrada:') !!}
+               {!! Form::textarea('entrada', null, ['class' => 'form-control']) !!}
+
+               @error('tp')
+                  <small class="text-danger">{{$message}}</small>
+               @enderror
+
+            </div>
 
             <div class="form-group">
                {!! Form::label('sl', 'Stop Loss:') !!}
@@ -137,12 +197,39 @@
                @enderror
 
             </div>
-
             <div class="form-group">
-               {!! Form::label('entrada', 'Orden de entrada:') !!}
-               {!! Form::textarea('entrada', null, ['class' => 'form-control']) !!}
+               <p class="font-weight-bold">Riesgo/Beneficio</p>
 
-               @error('tp')
+
+               <label>
+                  {!! Form::radio('RR', "1:1", true) !!}
+                  1:1
+               </label>
+
+               <label>
+                  {!! Form::radio('RR', "1:2") !!}
+                  1:2
+               </label>
+               <label>
+                  {!! Form::radio('RR', "1:3") !!}
+                  1:3
+               </label>
+               <label>
+                  {!! Form::radio('RR', "1:4") !!}
+                  1:4
+               </label>
+               <label>
+                  {!! Form::radio('RR', "1:5") !!}
+                  1:5
+               </label>
+               <label>
+                  {!! Form::radio('RR', "1:6") !!}
+                  1:6
+               </label>
+
+      
+               @error('status')
+               <br>  
                   <small class="text-danger">{{$message}}</small>
                @enderror
 
@@ -157,3 +244,5 @@
    				@enderror
 
    			</div>
+
+    

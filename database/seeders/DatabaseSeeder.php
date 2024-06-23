@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
       Storage::deleteDirectory('posts');
     	Storage::makeDirectory('posts');
 
-      Storage::deleteDirectory('products');
-      Storage::makeDirectory('products');
+      // Storage::deleteDirectory('products');
+      // Storage::makeDirectory('products');
 
 
       Storage::deleteDirectory('articles');
@@ -35,11 +35,12 @@ class DatabaseSeeder extends Seeder
        $this->call(UserSeeder::class);
        Category::factory(4)->create();
        Tag::factory(8)->create();
+       $this->call(IconoSeeder::class);
        $this->call(PostSeeder::class);
        $this->call(ArticleSeeder::class);
 
 
-       Product::factory(50)->create();
+      //  Product::factory(0)->create();
   
     }
 }

@@ -1,348 +1,94 @@
 <x-app-layout>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@if (!empty($searchResults) && count($searchResults) > 0)
+            <div x-data="{ isOpen: false }" class="search-results-container absolute mt-2 w-full bg-white border border-gray-300 rounded shadow-lg" style="z-index: 1;">
+              <!-- Contenedor del resultado de búsqueda con ancho del 100% -->
+              <div style="width: 100%;">
+                <ul>
+                  @foreach ($searchResults as $result)
+                  <li class="p-2 hover:bg-gray-100">
+                    <div class="flex items-center">
+                      @if ($result->image)
+                      <img src="{{ Storage::url($result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                      @else
+                      <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                      @endif
+                      <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline">{{ $result->name }}</a>
+                    </div>
 
-
-  <div class="max-w-5xl mx-auto px-4 lg:px-8 py-12">
-
-      @foreach ($articles as $article)
-          <article class="card mb-6">
-
-            <!-- <img class="h-72 w-full object-cover object-center" src="@if($article->image){{Storage::url($article->image->url)}} @endif" alt=""> -->
-      <a class="text-gray-900" href="{{route('articles.show', $article)}}">
-            <div class="card-body flex align-items-center justify-content-between ">
-
-            <div class="estados flex text-lg text-gray-500 mp-2">
-           
-              @if($article->estado=="En curso")
-                {!!$article->estado="Abierta"!!}
-              <style>.estados{display: flex; align-items: center; justify-content: center; background-color: crimson; color: white; border-radius: 15px; padding-right: 5px; padding-left: 5px; width: 79px;}</style>
-              @else
-                {!!$article->estado="Cerrada"!!}
-              @endif
-            </div>
-
-
-              <div class="tituloSignal font-bold text-xl mb-2 mt-2 px-8">
-                {!!$article->title!!}
+                  </li>
+                  @endforeach
+                </ul>
               </div>
-
-            <div class="fecha text-xl text-gray-500 text-right mp-2 ">
-               {!!$article->created_at!!}
             </div>
+            @endif
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
 
+  <link rel="stylesheet" href="css/articles.css">
+  
+  <div class="max-w-2xl mx-auto px-4 lg:px-8 py-12">
+
+  <div class="flex">
+  <!-- Grupo Free -->
+    <a class="text-gray-900 w-full bg-tele rounded-lg shadow-lg mb-6 hover:shadow-xl transition duration-300 ease-in-out" href="{{ Auth::user() && Auth::user() ? route('unirte-al-grupo') :  route('unirte-al-grupo') }}">
+      <div class="p-4">
+        <div class="tituloSignal text-white font-bold text-xl mb-2 mt-2 text-center">Grupo Telegram</div>
+        <div class="fecha text-center">
+          <div class="flex items-center justify-center text-gray-700 hover:text-blue-500">
+            <img src="{{ asset('img/telegrama.png') }}" alt="Icono de Telegram" class="w-12 mr-2">
             </div>
-      </a>
-
-          </article>
-      @endforeach
-
-
-        
+        </div>
+      </div>
+    </a>
 
 
-  </div>
-
-  <div class="container py-10">
-
-          <div class="mt-6">
-             {{$articles->links()}}
-          </div>
+<!-- <a class="text-gray-900 w-full bg-tele rounded-lg shadow-lg mb-6 hover:shadow-xl transition duration-300 ease-in-out" href="{{ Auth::user() && Auth::user()->subscribed('señales') ? route('unirte-al-grupo-plus') : route('billing.index') }}">
+      <div class="p-4">
+        <div class="tituloSignal text-white font-bold text-xl mb-2 mt-2 text-center">PLUS</div>
+        <div class="fecha text-center">
+          <div class="flex items-center justify-center text-gray-700 hover:text-blue-500">
+            <img src="{{ asset('img/telegrama.png') }}" alt="Icono de Telegram" class="w-12 mr-2">
+            </div>
+        </div>
+      </div>
+    </a> -->
 </div>
 
-	<!-- Footer -->
 
+    <div id="articles-container">
+      {{-- Tabla de Todas las señales --}}
+      @include('articles.partials.tab-all')
 
-<style>
-
-.fecha{
-  display: flex;
-  align-items: center;
-}
-
-.tituloSignal{
-  display: flex;
-  font-size: 20px;
-  align-items: center;
-
-}
-
-	a{
-		text-decoration: none;
-		color: white;
-
-	}
-
-	a:hover{
-		color: #dc3545;
-	}
-
-	.unirse{
-		border-radius: 30px;
-	}
-
-	.unirse a{
-		color: white;
-	}
-
-	.unirse a:hover{
-		color: white;
-	}
-
-    footer{
-        background-color: #1f2937;
-    }
-
-    .footer-copyright{
-         background-image: linear-gradient(to left top, #1f2937, #3b365c, #723770, #af2e68, #dc3545);
-    }
-
-    .nosotros{
-        text-align: left;
-        margin-top: 20px;
-    }
-
-    .nosotros ul li{
-        margin-top: 10px;
-        font-size: 16px;
-    }
-
-      .nosotros .imgInst{
-        margin-left: 45%;
-    }
-
-    .sombras-xl {
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 50%;
-    display: table;
-}
-.contenido {
-    border-radius: 50%;
-    color: #fff7f7;
-    font-size: 4em;
-    height: 100%;
-    display: table-cell;
-    vertical-align: middle;
-    text-shadow: 
-    1px 1px #393E46,
-    2px 2px #393E46,
-    3px 3px #393E46,
-    4px 4px #393E46,
-    5px 5px #393E46,
-    6px 6px #393E46,
-    7px 7px #393E46,
-    8px 8px #393E46,
-    9px 9px #393E46,
-    10px 10px #393E46,
-    11px 11px #393E46,
-    12px 12px #393E46,
-    13px 13px #393E46,
-    14px 14px #393E46,
-    15px 15px #393E46,
-    16px 16px #393E46,
-    17px 17px #393E46,
-    18px 18px #393E46,
-    19px 19px #393E46,
-    20px 20px #393E46,
-    21px 21px #393E46,
-    22px 22px #393E46,
-    23px 23px #393E46,
-    24px 24px #393E46,
-    25px 25px #393E46,
-    26px 26px #393E46,
-    27px 27px #393E46,
-    28px 28px #393E46,
-    29px 29px #393E46,
-    30px 30px #393E46,
-    31px 31px #393E46,
-    32px 32px #393E46,
-    33px 33px #393E46,
-    34px 34px #393E46,
-    35px 35px #393E46,
-    36px 36px #393E46,
-    37px 37px #393E46,
-    38px 38px #393E46,
-    39px 39px #393E46,
-    40px 40px #393E46,
-    41px 41px #393E46,
-    42px 42px #393E46,
-    43px 43px #393E46,
-    44px 44px #393E46,
-    45px 45px #393E46,
-    46px 46px #393E46,
-    47px 47px #393E46,
-    48px 48px #393E46,
-    49px 49px #393E46,
-    50px 50px #393E46,
-    51px 51px #393E46,
-    52px 52px #393E46,
-    53px 53px #393E46,
-    54px 54px #393E46,
-    55px 55px #393E46,
-    56px 56px #393E46,
-    57px 57px #393E46,
-    58px 58px #393E46,
-    59px 59px #393E46,
-    60px 60px #393E46,
-    61px 61px #393E46,
-    62px 62px #393E46,
-    63px 63px #393E46,
-    64px 64px #393E46,
-    65px 65px #393E46,
-    66px 66px #393E46,
-    67px 67px #393E46,
-    68px 68px #393E46,
-    69px 69px #393E46,
-    70px 70px #393E46,
-    71px 71px #393E46,
-    72px 72px #393E46,
-    73px 73px #393E46,
-    74px 74px #393E46,
-    75px 75px #393E46,
-    76px 76px #393E46,
-    77px 77px #393E46,
-    78px 78px #393E46,
-    79px 79px #393E46,
-    80px 80px #393E46,
-    81px 81px #393E46,
-    82px 82px #393E46,
-    83px 83px #393E46,
-    84px 84px #393E46,
-    85px 85px #393E46,
-    86px 86px #393E46,
-    87px 87px #393E46,
-    88px 88px #393E46,
-    89px 89px #393E46,
-    90px 90px #393E46,
-    91px 91px #393E46,
-    92px 92px #393E46,
-    93px 93px #393E46,
-    94px 94px #393E46,
-    95px 95px #393E46,
-    96px 96px #393E46,
-    97px 97px #393E46,
-    98px 98px #393E46,
-    99px 99px #393E46,
-   100px 100px#393E46;
-   mix-blend-mode:hard-light;
-   overflow: hidden;
-}
-
-.instagram {
-background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-
-</style>
-
-<footer class="page-footer font-small stylish-color-danger text-danger pt-4">
-
-  <!-- Footer Links -->
-  <div class="container text-center text-md-left">
-
-    <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-4 mx-auto">
-
-        <!-- Content -->
    
-         <a href="/" class="icon flex-shrink-0 flex text-center items-center mt-3 mb-4">
-          Forex<span class="iconSecundario">.Gump</span> 
-        </a>
-        <p>Comenza hoy con nuestro plan de trading y empeza a recibir señales por nuestra pagina.</p><br>
-        <p class="text-white">“La bondad es la única inversión que nunca quiebra.” Henry David Thoreau</p>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none">
-
-      <!-- Grid column -->
-      <div class="nosotros col-md-4 mx-auto">
-
-        <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Nosotros</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="/politicas">Politicas de Privacidad</a>
-          </li>
-          <li>
-            <a href="/terminos">Terminos y Condiciones</a>
-          </li>
-          <li>
-            <a href="/contactanos">Contacto</a>
-          </li>
-          <li>
-            <a href="#about">Quiénes somos</a>
-          </li>
-        </ul>
-
-      </div>
-
-            <hr class="clearfix w-100 d-md-none">
-
-      <div class="nosotros col-md-1 mx-auto">
-
-        <!-- Links -->
-        <h5 class="text-white text-center font-weight-bold text-uppercase mt-3 mb-2">Seguinos</h5>
-
-        <ul class="list-unstyled">
-          <li>
-          
-            <a href="https://www.instagram.com/f0rex_gump/?hl=es-la">
-             <div class="sombras-xl instagram">
-                <div class="contenido">
-                    <i class="fa-brands fa-instagram"></i>         
-                </div>        
-             </div>
-            </a>
-          </li>
-        
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-
-
-
-      <!-- Grid column -->
- 
-      <!-- Grid column -->
 
     </div>
-    <!-- Grid row -->
 
   </div>
-  <!-- Footer Links -->
 
-  <hr class="bg-white">
+  <div id="load-more" data-page="{{ $articles->currentPage() + 1 }}" data-last-page="{{ $articles->lastPage() }}">
+        <!-- ... botón u otra forma de activar la carga de más artículos ... -->
 
-   <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <h5 class="mb-1">Unete ahora</h5>
-      </li>
-      <li class="list-inline-item unirse bg-danger">
-        <a href="{{route('register')}}" class="btn btn-outline-white btn-rounded">Registrarme</a>
-      </li>
-    </ul>
+    </div>
+
+  <script src="js/articles.js"></script>
 
 
-  <!-- Copyright -->
-  <div class="footer-copyright bg-danger text-white text-center py-3">© 2022 Copyright:
-    <a href="https://mdbootstrap.com/"> www.forexgump.com</a>
-  </div>
-  <!-- Copyright -->
+<!-- 
+<script>
+        function actualizarArticulos() {
+            $.get("{{ route('articles.index') }}", function(data) {
+                var nuevaTabAll = $(data).find('#articles-container').html();
+                $("#articles-container").html(nuevaTabAll);
+            });
+            console.log("peticion actualizada");
+        }
 
-</footer>
-<!-- Footer -->
-	
+        $(document).ready(function() {
+            // Actualizar cada 10 segundos (10000 milisegundos)
+            setInterval(actualizarArticulos, 15000);
+        });
+    </script> -->
+  <script>
+    var csrfToken = "{{ csrf_token() }}";
+  </script>
 </x-app-layout>

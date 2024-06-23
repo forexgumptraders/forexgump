@@ -13,7 +13,7 @@
 
                         <p class="mt-4 text-gray-200 font-bold text-xl">{{$product->price}} USD</p>
 
-                        <a href="" class="btn btn-danger">Comprar</a>
+                        <a href="{{route('products.pay', $product)}}" class="btn btn-danger">Comprar</a>
 
                     </div>
 
@@ -255,7 +255,7 @@ background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+
             <a href="/contactanos">Contacto</a>
           </li>
           <li>
-            <a href="#about">Quiénes somos</a>
+            <a href="/nosotros">Quiénes somos</a>
           </li>
         </ul>
 

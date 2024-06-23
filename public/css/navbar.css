@@ -1,0 +1,125 @@
+
+.nosotrosBtn {
+    background-color: crimson;
+}
+
+#currency-list li {
+    /* ... (otros estilos) ... */
+    flex-direction: row;
+    /* Cambiar a una disposición horizontal */
+    justify-content: center;
+    /* Centrar horizontalmente el contenido */
+    align-items: center;
+    /* Centrar verticalmente el contenido */
+
+}
+
+#currency-list li img {
+    /* ... (otros estilos) ... */
+    margin-right: 3px;
+    /* Espacio entre la imagen y el título */
+}
+
+.forex-prices ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0px;
+}
+
+
+.currency-info span {
+    margin-right: 3px;
+    /* Agregar espacio vertical entre el título y el precio */
+}
+
+.forex-prices {
+    overflow-x: hidden;
+}
+
+#currency-list li {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#currency-list li img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.currency-carousel {
+    cursor: grab;
+}
+
+.currency-carousel:active {
+    cursor: grabbing;
+}
+
+
+.login a {
+    font-size: 13px;
+}
+
+
+
+
+
+.dos {
+    display: inline-flex;
+    width: 100%;
+    text-transform: uppercase;
+    transition: .3s ease all;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 15px;
+  
+
+}
+
+
+
+.dos::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    background: #f9218d;
+    position: absolute;
+    z-index: -1;
+    margin-top: 20px;
+    left: -120px;
+    transition: .3s ease-in-out all;
+    opacity: .4;
+
+
+}
+
+
+
+
+.dos:hover::after {
+    top: 10px;
+    left: 0px;
+}
+
+
+
+@media screen and (min-width: 639px) and (max-width: 759px) {
+    .menuOptions{
+        margin-top: 15px;
+    }
+  }
+
+.secciones {
+    z-index: 100;
+}
+
+

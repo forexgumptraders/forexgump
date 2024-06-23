@@ -15,20 +15,21 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    
+    'paths' => ['*'],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
+    'allowed_methods' => ['GET, PUT, POST, DELETE, OPTIONS'],
 
-    'allowed_origins' => ['http://localhost:80', 'http://blog.test'],
+    'allowed_origins' => ['http://blog.test'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Access-Control-Allow-Origin', 'content-type', 'accept', 'x-custom-header'],
+    'allowed_headers' => ['Content-Type', 'Accept', 'X-Custom-Header', 'X-Auth-Token', 'Authorization'],
 
     'exposed_headers' => ['x-custom-response-header'],
 
-    'max_age' => 60,
+    'max_age' => 1000,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

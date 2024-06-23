@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/ ',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -265,11 +265,27 @@ return [
         [
             'text'        => 'Lista de roles',
             'route'       => 'admin.roles.index',
-            'icon'        => 'fas fa-users-cog fa-fw',
+            'icon'        => 'fas fa-fw fa-user-cog',
+            'active'      =>  ['admin/roles*'],
+            'can'         => 'admin.roles.index'
+
+        ],
+
+        [
+            'text'        => 'Robots',
+            'route'       => 'admin.robots.index',
+            'icon'        => 'fas fa-robot fa-fw',
             'can'         => 'admin.users.index'
             
         ],
-
+        [
+            'text' => 'Editar plantilla',
+            'route'  => 'admin.icono.edit',
+            'icon'   => 'fas fa-fw fa-edit',
+            'can'   => 'admin.users.index'
+        ],
+        
+        ['header' => 'OPCCIONES DE BLOG'],
         [
             'text' => 'Categorias',
             'route'  => 'admin.categories.index',
@@ -282,10 +298,8 @@ return [
             'route'  => 'admin.tags.index',
             'icon' => 'far fa-fw fa-bookmark',
             'active' => ['admin/tags*'],
-            'can'         => 'admin.tags.index'
+            'can'    => 'admin.tags.index'
         ],
-        
-        ['header' => 'OPCCIONES DE BLOG'],
         [
             'text'       => 'Lista de post',
             'route'        => 'admin.posts.index',
@@ -295,21 +309,23 @@ return [
         [
             'text'       => 'Crear nuevo post',
             'route'        => 'admin.posts.create',
-            'icon'       => 'fas fa-fw fa-file',
+            'icon'       => 'fas fa-fw fa-plus  ',
                 'can'         => 'admin.posts.create'
         ],
+
+        ['header' => 'OPCCIONES DE SEÑALES'],
 
           [
             'text'       => 'Lista de señales',
             'route'        => 'admin.articles.index',
-            'icon'       => 'fas fa-fw fa-clipboard',
-                'can'         => 'admin.articles.index'
+            'icon'       => 'fas fa-fw fa-signal',
+            'can'         => 'admin.articles.index'
         ],
         [
             'text'       => 'Crear nueva señal',
             'route'        => 'admin.articles.create',
-            'icon'       => 'fas fa-fw fa-file',
-                'can'         => 'admin.articles.create'
+            'icon'       => 'fas fa-fw fa-plus',
+            'can'         => 'admin.articles.create'
         ],
     ],
 
@@ -433,25 +449,6 @@ return [
     |
     */
 
-    'iframe' => [
-        'default_tab' => [
-            'url' => null,
-            'title' => null,
-        ],
-        'buttons' => [
-            'close' => true,
-            'close_all' => true,
-            'close_all_other' => true,
-            'scroll_left' => true,
-            'scroll_right' => true,
-            'fullscreen' => true,
-        ],
-        'options' => [
-            'loading_screen' => 1000,
-            'auto_show_new_tab' => true,
-            'use_navbar_items' => true,
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

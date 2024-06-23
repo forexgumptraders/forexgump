@@ -10,10 +10,13 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -31,6 +34,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'serenus',
+        'aureum',
+        'supra',
     ];
 
     /**
@@ -63,21 +69,40 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    
     //relacion uno a muchos
 
-    public function posts(){
+    public function posts()
+    {
 
         return $this->hasMany(Post::class);
     }
 
 
-    public function article(){
+    public function article()
+    {
 
         return $this->hasMany(Article::class);
     }
 
+
+    public function hasActiveSubscription()
+    {
+        $hasActiveSubscription = DB::table('subscriptions')
+            ->where('user_id', $this->id)
+            ->where('name', 'señales')
+            ->where(function ($query) {
+                $query->whereNull('ends_at')
+                    ->orWhere('ends_at', '>', Carbon::now());
+            })
+            ->exists();
+
+        // Actualizar el campo subscription_status
+        $this->subscription_status = $hasActiveSubscription;
+        $this->save(); // Guardar el modelo actualizado en la base de datos
+
+        return $hasActiveSubscription;
+    }
+
+
 }
-
-
-
-

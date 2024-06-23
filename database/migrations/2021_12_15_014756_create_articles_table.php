@@ -17,18 +17,25 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title');
             // $table->string('image');
-            $table->enum("orden", ["Compra", "Venta"]);
+            $table->enum("orden", ["Buy", "Sell", "Buy Limit", "Sell Limit", "Buy Stop", "Sell Stop"]);
             $table->text('sl')->nullable();
             $table->text('tp')->nullable();
             $table->text('entrada')->nullable();
+            $table->enum("RR", ["1:1", "1:2", "1:3", "1:4", "1:5", "1:6"]);
             $table->longText('body')->nullable();
-            // $table->string('slug');
 
-            $table->enum("estado", ["En curso", "Positiva", "Negativa"])->default("En curso");
+
+            $table->enum("modo", ["free", "plus"])->default("free");;
+
+
+            $table->enum("estado", ["En curso", "Positiva", "Negativa", "Cancelada", "Break even"])->default("En curso");
 
             $table->enum('status', [1, 2])->default(1);
-            
+
+
             $table->unsignedBigInteger('user_id')->nullable();
+
+
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

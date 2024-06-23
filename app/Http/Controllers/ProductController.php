@@ -16,4 +16,9 @@ class ProductController extends Controller
 
     	return view('products.index', compact('products'));
     }
+
+
+    public function pay(Product $product){
+        return view('products.pay', compact('product'));
+    }
 }
