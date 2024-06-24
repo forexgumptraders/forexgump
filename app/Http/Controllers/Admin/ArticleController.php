@@ -168,10 +168,13 @@ class ArticleController extends Controller
             $modo = $request->input('modo');
         
             if ($modo === 'free' || $modo === 'plus') {
-        
+                
+
+                $botToken = env('TELEGRAM_BOT_TOKEN');
+
                 // Enviar mensaje utilizando TeleBot
                 $bot = new TeleBot([
-                    'token'      => '6316011921:AAETN-4kJn1qslxlAdmvhaSK57qSr_-gDN8',
+                    'token'      => $botToken,
                     'name'       => 'forexgump_bot',
                     'api_url'    => 'https://api.telegram.org/bot6316011921:AAETN-4kJn1qslxlAdmvhaSK57qSr_-gDN8/{METHOD}',
                     'exceptions' => true,
@@ -393,9 +396,12 @@ if ($request->input('status') === '2') {
 
     if ($modo === 'free' || $modo === 'plus') {
 
+        $botToken = env('TELEGRAM_BOT_TOKEN');
+
+
         // Enviar mensaje utilizando TeleBot
         $bot = new TeleBot([
-            'token'      => '6316011921:AAETN-4kJn1qslxlAdmvhaSK57qSr_-gDN8',
+            'token'      => $botToken,
             'name'       => 'forexgump_bot',
             'api_url'    => 'https://api.telegram.org/bot6316011921:AAETN-4kJn1qslxlAdmvhaSK57qSr_-gDN8/{METHOD}',
             'exceptions' => true,
