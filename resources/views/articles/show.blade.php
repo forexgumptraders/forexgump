@@ -1,7 +1,7 @@
 <x-app-layout>
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-  <div class="card max-w-5xl mx-auto px-4 lg:px-8 py-12">
+  <div class="card max-w-5xl mx-auto px-4 lg:px-8 py-12 mt-8">
     @if ($article->estado == "Positiva" || $article->estado == "Negativa")
     <div class="alert alert-danger">Esta señal está cerrada, mirá las abiertas</div>
     <style>

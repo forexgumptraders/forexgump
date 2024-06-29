@@ -65,8 +65,9 @@ class ArticleController extends Controller
     {
 
         $request->validate([
-            'file' => 'required|image'
+            'file' => 'required|image',
         ]);
+
         $article = Article::create($request->all());
 
         if ($request->file('file')) {
@@ -229,6 +230,8 @@ class ArticleController extends Controller
                 // Despacha el Job para enviar notificaciones en cola
                 dispatch(new SendNotificationJob($article, $users));
             }
+
+            
         // if ($request->input('status') === '2') {
         //     $currentUser = auth()->user();
         

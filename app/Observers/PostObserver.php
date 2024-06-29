@@ -17,8 +17,10 @@ class PostObserver
 
     public function deleting(Post $post)
     {
-        if ($post->image) {
-            Storage::delete($post->image->url);
+        // Eliminar todas las imágenes asociadas al post
+        foreach ($post->images as $image) {
+            Storage::delete($image->url);
+            $image->delete();
         }
     }
 

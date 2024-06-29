@@ -40,29 +40,29 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-
-
         $post = Post::create($request->all());
-
-        if ($request->file('file')) {
-
-            $url = Storage::put('posts', $request->file('file'));
-
-            $post->image()->create([
-                'url' => $url
-            ]);
+    
+        // Manejar la primera imagen
+        if ($request->hasFile('file1')) {
+            $url = Storage::put('posts', $request->file('file1'));
+            $post->images()->create(['url' => $url]);
         }
-
+    
+        // Manejar la segunda imagen
+        if ($request->hasFile('file2')) {
+            $url = Storage::put('posts', $request->file('file2'));
+            $post->images()->create(['url' => $url]);
+        }
+    
         Cache::flush();
-
-
+    
         if ($request->tags) {
             $post->tags()->attach($request->tags);
         }
-
+    
         return redirect()->route('admin.posts.edit', $post);
     }
-
+    
 
     public function edit(Post $post)
     {
@@ -77,34 +77,59 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $this->authorize('author', $post);
-
+    
+        // Actualizar los campos del post
         $post->update($request->all());
-
-        if ($request->file('file')) {
-            $url = Storage::put('posts', $request->file('file'));
-
-            if ($post->image) {
-
-                Storage::delete('$post->image->url');
-
-                $post->image->update([
-                    'url' => $url
-                ]);
-            
-            }else{
-                $post->image()->create([
-                    'url' => $url
-                ]);
+    
+        // Manejar la primera imagen (file1)
+        if ($request->hasFile('file1')) {
+            $firstImage = $post->images()->first(); // Obtener la primera imagen asociada al post
+    
+            if ($firstImage) {
+                // Eliminar la imagen actual
+                Storage::delete($firstImage->url);
+                
+                // Actualizar la imagen existente
+                $url1 = Storage::put('posts', $request->file('file1'));
+                $firstImage->update(['url' => $url1]);
+            } else {
+                // Crear una nueva imagen si no existe
+                $url1 = Storage::put('posts', $request->file('file1'));
+                $post->images()->create(['url' => $url1]);
+            }
+        }
+    
+    
+        // Manejar la segunda imagen (file2)
+        if ($request->hasFile('file2')) {
+            $secondImage = $post->images()->skip(1)->first(); // Obtener la segunda imagen asociada al post si existe
+    
+            if ($secondImage) {
+                // Eliminar la imagen actual
+                Storage::delete($secondImage->url);
+    
+                // Actualizar la segunda imagen existente
+                $url2 = Storage::put('posts', $request->file('file2'));
+                $secondImage->update(['url' => $url2]);
+            } else {
+                // Crear una nueva segunda imagen si no existe
+                $url2 = Storage::put('posts', $request->file('file2'));
+                $post->images()->create(['url' => $url2]);
             }
         }
 
+        
+    
+        // Sincronizar etiquetas
         if ($request->tags) {
             $post->tags()->sync($request->tags);
         }
-
+    
+        // Limpiar cache si es necesario
         Cache::flush();
-
-        return redirect()->route('admin.posts.edit', $post)->with('info', 'El post se actualizo con exito');
+    
+        // Redirigir con mensaje de éxito
+        return redirect()->route('admin.posts.edit', $post)->with('info', 'El post se actualizó con éxito');
     }
 
 

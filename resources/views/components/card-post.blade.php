@@ -1,11 +1,12 @@
 @props(['post'])
 
 <article class="mb-8 bg-white shadow-lg rounded-lg overflow-hidden">
-				@if($post->image)
-				<img class="w-full h-72 object-cover object-center" src="{{Storage::url($post->image->url)}}" alt="">
-				@else
-				<img class="w-full h-72 object-cover object-center" src="https://cdn.pixabay.com/photo/2019/09/05/03/47/trading-4453011_960_720.jpg" alt="">
-				@endif
+@if($post->images->count() > 0)
+    <img class="w-full h-72 object-cover object-center" src="{{ Storage::url($post->images->first()->url) }}" alt="">
+@else
+    <img class="w-full h-72 object-cover object-center" src="https://cdn.pixabay.com/photo/2019/09/05/03/47/trading-4453011_960_720.jpg" alt="">
+@endif
+
 
 				<div class="px-6 py-4">
 						<h1 class="font-bold text-xl mb-2">

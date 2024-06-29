@@ -31,9 +31,9 @@
 			</div>
 
 			<!-- Whatsapp's Button -->
-			<div class="share-button share-whatsapp" data-network="whatsapp">
+			<!-- <div class="share-button share-whatsapp" data-network="whatsapp">
 				<img src="{{ asset('img/whatsapp.png') }}" alt="WhatsApp">
-			</div>
+			</div> -->
 
 			<!-- Instagram's Button -->
 			<!-- <div class="share-button share-instagram" data-network="instagram">
@@ -64,20 +64,28 @@
 			<!-- contenido principal -->
 
 			<div class="lg:col-span-2">
-
-				<figure>
-
-					@if($post->image)
-					<img class="w-full h-80 object-cover object-center" src="{{Storage::url($post->image->url)}}" alt="">
-					@else
+			<figure>
+				@if($post->images->count() > 0)
+					<img class="w-full h-80 object-cover object-center" src="{{ Storage::url($post->images[0]->url) }}" alt="">
+				@else
 					<img class="w-full h-80 object-cover object-center" src="https://cdn.pixabay.com/photo/2019/09/05/03/47/trading-4453011_960_720.jpg" alt="">
-					@endif
+				@endif 
+			</figure>
 
-				</figure>
+			<div class="text-base text-gray-500 mt-4">
+				{!! $post->body !!}
+			</div>
 
-				<div class="text-base text-gray-500 mt-4">
-					{!!$post->body!!}
-				</div>
+			<figure>
+				@if($post->images->count() > 1)
+					<img class="w-full h-80 object-cover object-center" src="{{ Storage::url($post->images[1]->url) }}" alt="">
+				@endif
+			</figure>
+
+			<div class="text-base text-gray-500 mt-4">
+				{!! $post->bodysecond !!}
+			</div>
+
 
 				<div class="user flex">
 					<svg class="iconUser" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(166, 163, 164, 1);">
@@ -102,9 +110,9 @@
 					</div>
 
 					<!-- Whatsapp's Button -->
-					<div class="share-button share-whatsapp" data-network="whatsapp">
+					<!-- <div class="share-button share-whatsapp" data-network="whatsapp">
 						<img src="{{ asset('img/whatsapp.png') }}" alt="WhatsApp">
-					</div>
+					</div> -->
 
 					<!-- Instagram's Button -->
 					<!-- <div class="share-button share-instagram" data-network="instagram">
@@ -132,20 +140,19 @@
 					<h1 class="text-2xl font-bold text-gray-600 mb-4">Mas en {{$post->category->name}}</h1>
 
 					<ul>
-						@foreach($similares as $similar)
+					@foreach($similares as $similar)
 						<li class="mb-4">
-							<a class="flex" href="{{route('posts.show', $similar)}}">
-
-								@if($similar->image)
-								<img class="w-36 h-20 object-cover object-center" src="{{Storage::url($similar->image->url)}}" alt="">
+							<a class="flex" href="{{ route('posts.show', $similar) }}">
+								@if($similar->images->count() > 0)
+									<img class="w-36 h-20 object-cover object-center" src="{{ Storage::url($similar->images->first()->url) }}" alt="">
 								@else
-								<img class="w-36 h-20 object-cover object-center" src="https://cdn.pixabay.com/photo/2019/09/05/03/47/trading-4453011_960_720.jpg" alt="">
+									<img class="w-36 h-20 object-cover object-center" src="https://cdn.pixabay.com/photo/2019/09/05/03/47/trading-4453011_960_720.jpg" alt="">
 								@endif
-
-								<span class="flex-1 ml-2 text-gray-600">{{$similar->name}}</span>
+								<span class="flex-1 ml-2 text-gray-600">{{ $similar->name }}</span>
 							</a>
 						</li>
-						@endforeach
+					@endforeach
+
 					</ul>
 
 				</aside>

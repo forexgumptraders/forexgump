@@ -229,11 +229,12 @@
                   @foreach ($searchResults as $result)
                   <li class="p-2 hover:bg-gray-100">
                     <div class="flex items-center">
-                      @if ($result->image)
-                      <img src="{{ Storage::url($result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
-                      @else
-                      <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
-                      @endif
+                    @if ($result->images->count() > 0)
+                        <img src="{{ Storage::url($result->images->first()->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                    @else
+                        <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                    @endif
+
                       <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline result-post">{{ $result->name }}</a>
                     </div>
 
@@ -376,11 +377,12 @@
             @foreach ($searchResults as $result)
             <li class="p-2 hover:bg-gray-100">
               <div class="flex items-center">
-                @if ($result->image)
-                <img src="{{ Storage::url($result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
-                @else
-                <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
-                @endif
+              @if ($result->images->count() > 0)
+                  <img src="{{ Storage::url($result->images->first()->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+              @else
+                  <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+              @endif
+
                 <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline result-post">{{ $result->name }}</a>
               </div>
 
@@ -414,11 +416,12 @@
               @foreach ($searchResults as $result)
               <li class="p-2 hover:bg-gray-100">
                 <div class="flex items-center">
-                  @if ($result->image)
-                  <img src="{{ asset('storage/' . $result->image->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
-                  @else
-                  <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
-                  @endif
+                @if ($result->images->count() > 0)
+                    <img src="{{ asset('storage/' . $result->images->first()->url) }}" alt="{{ $result->name }}" class="w-12 h-12 mr-2">
+                @else
+                    <img src="https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg" alt="Imagen por defecto" class="w-12 h-12 mr-2">
+                @endif
+
                   <a href="{{ route('posts.show', $result) }}" class="text-black-500 hover:no-underline">{{ $result->name }}</a>
 
                 </div>

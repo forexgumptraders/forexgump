@@ -68,7 +68,7 @@ class MessageSent extends Notification implements ShouldQueue
 
         return [
             'url' => route('articles.show', $this->article->id),
-            'message' => 'Nueva notificación relacionada con: ' . $this->article->title
+            'message' => 'Señal relacionada con: ' . $this->article->title
         ];
     }
 

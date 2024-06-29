@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
        $this->call(PostSeeder::class);
        $this->call(ArticleSeeder::class);
 
+      //#1F2937
 
+      // 31 41 55
       //  Product::factory(0)->create();
   
     }

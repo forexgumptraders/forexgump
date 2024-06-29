@@ -236,13 +236,13 @@
             </div>
 
    			<div class="form-group">
-   				{!! Form::label('body', 'Cuerpo de la señal:') !!}
-   				{!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+               {!! Form::label('body', 'Cuerpo de la señal:') !!}
+               {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
 
-   				@error('body')
-   					<small class="text-danger">{{$message}}</small>
-   				@enderror
+               @error('body')
+                  <small class="text-danger">{{$message}}</small>
+               @enderror
+            </div>
 
-   			</div>
 
     

@@ -35,10 +35,11 @@ class Post extends Model
 
     //relacion uno a uno polimorfica
 
-    public function image(){
-    	return $this->morphOne(Image::class, 'imageable');
+    public function images(){
+        return $this->morphMany(Image::class, 'imageable');
     }
-
+    
+ 
 
     public function getCreatedAtAttribute($date){
 

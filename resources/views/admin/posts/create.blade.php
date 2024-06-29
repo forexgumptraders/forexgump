@@ -66,21 +66,40 @@
             console.error( error );
         } );
 
-        //cambiar imagen
+        ClassicEditor
+        .create( document.querySelector( '#bodysecond ' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 
-        document.getElementById("file").addEventListener('change', cambiarImagen);
+         //cambiar imagen para file1
+		  document.getElementById("file1").addEventListener('change', cambiarImagen1);
 
-        function cambiarImagen(event){
-            var file = event.target.files[0];
+            function cambiarImagen1(event){
+                var file = event.target.files[0];
 
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                document.getElementById("picture").setAttribute('src', event.target.result);
-            };
+                var reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById("picture1").setAttribute('src', event.target.result);
+                };
 
-            reader.readAsDataURL(file);
-        }
+                reader.readAsDataURL(file);
+            }
 
+            //cambiar imagen para file2
+            document.getElementById("file2").addEventListener('change', cambiarImagen2);
+
+            function cambiarImagen2(event){
+                var file = event.target.files[0];
+
+                var reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById("picture2").setAttribute('src', event.target.result);
+                };
+
+                reader.readAsDataURL(file);
+            }
+            
 
 	</script>
 
