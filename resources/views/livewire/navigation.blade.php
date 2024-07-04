@@ -184,15 +184,15 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
 
-            <a href="/home" id="homeNosotros" class="dos text-white px-3 py-2 text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>HOME</span></a>
+            <a href="/home" id="homeNosotros" class="text-white px-3 py-2 text-sm font-medium" aria-current="page" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>HOME</span></a>
 
-            <a href="/articles" class="dos articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>SEÑALES</span></a>
+            <a href="/articles" class="articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>SEÑALES</span></a>
 
-            <a href="/trading-ai" class="dos articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>ROBOT</span></a>
+            <a href="/trading-ai" class="articlesBoton text-white px-3 py-2 text-sm font-medium" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor"><span>ROBOT</span></a>
 
             <div class="relative inline-block text-left" x-data="{open: false}" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
                 <div x-on:click="open = !open">
-                    <button type="button" class="dos inline-flex text-white px-3 py-2 text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                    <button type="button" class="inline-flex text-white px-3 py-2 text-sm font-medium" aria-current="page" id="menu-button" aria-expanded="false" aria-haspopup="true">
                         <span x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor">BLOG</span>
                         <svg class="-mr-1 ml-2 h-5 w-5 transition-transform transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" x-bind:class="{'rotated': open}">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" x-bind:style="'background-color: ' + $wire.navColor + '; color: ' + $wire.textColor" />
@@ -530,8 +530,6 @@
         @endauth
     </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

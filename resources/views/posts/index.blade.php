@@ -19,11 +19,40 @@
 			::-webkit-scrollbar-thumb:hover {
 				background: #555;
 			}
-		</style>
+
+                .iframe-container {
+                position: relative;
+                width: 100%;
+                height: 320px;
+                overflow: hidden;
+                box-sizing: border-box;
+                padding-top: 50px; /* Añade espacio superior para compensar el recorte */
+                margin-bottom: 15px;
+            }
+
+            .iframe-container iframe {
+                position: absolute;
+                top: -50px; /* Mueve el iframe 50px hacia arriba */
+                left: 0;
+                width: 100%;
+                height: calc(100% + 50px); /* Ajusta la altura para compensar el desplazamiento */
+            }
+
+            @media (min-width: 767px) and (max-width: 1024px) {
+                .iframe-container {
+                    width: 203.5%;
+                }
+            }
 
 
+    </style>
+  
+		
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
+        <div class="iframe-container">
+        <iframe src="https://www.widgets.investing.com/live-currency-cross-rates?theme=lightTheme&hideTitle=true&roundedCorners=true&cols=bid,ask,last,prev,high,low,changePerc&pairs=1,3,2,4,7,5,8,6,9,10,49,11" width="100%" height="100%" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+   
+    </div>
 		@foreach ($posts as $post)
         <article class="relative w-full h-80 bg-cover bg-center zoom-background @if($loop->first) md:col-span-2 @endif @if($darkMode) dark-bg @endif"
     style="background-image: url(
@@ -31,7 +60,7 @@
             {{ Storage::url($post->images->first()->url) }}
         @else
             https://cdn.pixabay.com/photo/2020/11/11/10/38/cat-5732087_960_720.jpg
-        @endif); border-radius: 6px;">
+        @endif); ">
     @if($darkMode)
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); border-radius: 8px;"></div>
     @endif
@@ -62,7 +91,7 @@
     }
 
     .zoom-background:hover {
-        transform: scale(1.02);
+        transform: scale(1.009);
     }
 
 </style>

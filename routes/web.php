@@ -65,7 +65,7 @@ Route::get('trading-ai', [VistasController::class, 'tradingai'])->name('home.tra
 
 
 // Route::get('view-bot-aureum', $controller_path . '\AureumController@aureum')->name('robot.aureum')->middleware('verificarPagoAureum')->middleware('auth');
-
+// routes/web.php
 
 Route::get('trading-ai/supra', [SupraController::class, 'supraIndex'])->name('robot.supraIndex');
 Route::post('trading-ai/supra/create-paypal-order', [SupraController::class, 'createPaypalOrder'])->name('robot.createPaypalOrder');
